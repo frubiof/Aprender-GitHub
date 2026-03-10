@@ -45,3 +45,16 @@ usethis::git_sitrep()
 # ── Active usethis project: "E:/Proyectos R/Aprender GitHub" ──
 
 #  ℹ Active project is not a Git repo.
+
+# Vacunar GitHub
+usethis::git_vaccinate()
+
+# Convertir carpeta en un Repositorio 📦
+usethis::use_git()
+
+# Conectar repositorio a GitHub
+usethis::use_github()
+
+# Se firma digitalmente
+# Ver Gemini Instructions
+
