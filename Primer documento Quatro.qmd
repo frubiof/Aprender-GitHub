@@ -1,10 +1,4 @@
-
-
-title: "Primer Reporte Quatro"
-author: "Fernando Rubio"
-format: html
-editor: visual
----
+title: "Primer Reporte Quatro" author: "Fernando Rubio" format: html editor: visual ---
 
 ## Quarto
 
@@ -35,3 +29,87 @@ dim(md) # No de filas y columnas
 
 ```
 
+# Introducción
+
+Este documento reporta los resultados de la evaluación de la implementación del modelo propuesto por el programa **Escuelas de Excelencia**.
+
+## Metodología
+
+Se hizo un muestreo aleatorio de escuelas, y dentro de las escuelas se evaluó la clase completa de estudiantes de segundo grado. En aquellas escuelas en las que habían dos o más secciones de segundo grado, se escogió una sección al azar.
+
+### Objetivos
+
+Los objetivos de este estudio son:
+
+1.  Determinar el nivel de lectura de los estudiantes
+2.  Identificar áreas mejora del programa
+3.  Informar a los decisores sobre el programa
+
+## Resultados
+
+```{r}
+#| label: Sexo y departamento
+#| echo: false
+table(md$Sexo)
+table(md$Nombre_Depa)
+
+```
+
+```{r}
+#| label: Suma respuestas correctas
+#| include: false
+
+md$total <-rowSums(md[, 38:50])
+```
+
+Estadísticas descriptivas de las calificaciones en la prueba de lectura. Puntajes brutos, sin transformar
+
+```{r}
+#| label: Graficas
+#| echo: false
+# Si es una variable numérica (ej. total)
+hist(md$total, 
+     main = "Distribución de Resultados", 
+     xlab = "Puntaje", 
+     ylab = "Frecuencia",
+     col = "steelblue")
+
+# O si es categórica (ej. Sexo)
+plot(as.factor(md$Sexo), 
+     main = "Participantes por Categoría", 
+     col = "orange")
+```
+
+```{r}
+#| label: Tablas profesionales
+#| echo: false
+# Primero cargamos la librería necesaria
+library(knitr)
+
+# Creamos la tabla de frecuencia
+tabla_frecuencia <- table(md$Nombre_Depa)
+
+# La convertimos en una tabla elegante
+kable(tabla_frecuencia, 
+      col.names = c("Categoría", "Frecuencia"),
+      caption = "Tabla 1: Distribución de la muestra por categoría")
+```
+
+```{r}
+#| label: Tabla con estadisticas descriptivas
+#| echo: false
+# Resumen descriptivo de una variable numérica
+resumen <- summary(md$total)
+
+# Convertir ese resumen en tabla
+kable(t(as.matrix(resumen)), # La 't' es para trasponerla y que se vea horizontal
+      caption = "Estadístico descriptivos de los resultados")
+```
+
+## Discusión
+
+Estos resultados permiten concluir lo siguiente
+
+-   El desempeño lector de los estudiantes está por debajo de lo esperado
+
+-   La compresnión lectora es el principal desafio para el programa

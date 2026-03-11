@@ -57,4 +57,22 @@ usethis::use_github()
 
 # Se firma digitalmente
 # Ver Gemini Instructions
-#
+
+# Usar Quarto en RStudio
+library(haven) # Para leer SPSS file
+
+library(haven)
+
+# Al estar el archivo en la misma carpeta, no necesitas la ruta larga
+md <- read_sav("20150819 - 2do. Lectura -  Funcafe.sav")
+
+# Esto nos mostrará cuántas filas y columnas cargamos
+dim(md)
+
+# Resumen estadístico básico Porción de código (chunk) 1
+
+
+summary(md$Sexo)
+summary(md$Edad)
+summary(md$Grad)
+table(md$Sexo)
